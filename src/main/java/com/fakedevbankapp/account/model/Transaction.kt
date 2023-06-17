@@ -13,7 +13,7 @@ data class Transaction(
         @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
         val id: String?,
 
-        val transaction: TransactionType? = TransactionType.INITIAL,
+        val transactionType: TransactionType? = TransactionType.INITIAL,
         val amount: BigDecimal?,
         val transactionDate: LocalDateTime?,
 
@@ -30,7 +30,7 @@ data class Transaction(
                 other as Transaction
 
                 if (id != other.id) return false
-                if (transaction != other.transaction) return false
+                if (transactionType != other.transactionType) return false
                 if (amount != other.amount) return false
                 if (transactionDate != other.transactionDate) return false
                 return account == other.account
@@ -38,7 +38,7 @@ data class Transaction(
 
         override fun hashCode(): Int {
                 var result = id?.hashCode() ?: 0
-                result = 31 * result + (transaction?.hashCode() ?: 0)
+                result = 31 * result + (transactionType?.hashCode() ?: 0)
                 result = 31 * result + (amount?.hashCode() ?: 0)
                 result = 31 * result + (transactionDate?.hashCode() ?: 0)
                 return result
